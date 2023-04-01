@@ -1,41 +1,53 @@
+package pages;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CustomersPage {
-    public String mainPageUrl = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager";
-
-    private WebDriver driver;
-
+/**
+ * Страница с таблицей всех клиентов
+ */
+public class CustomersPage extends BasePage{
     public CustomersPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+        super(driver);
     }
-
+    /**
+     * Вкладка Customers для перехода на страницу с таблицей клиентов
+     */
     @FindBy(xpath = "//button[contains(text(), 'Customers')]")
     private WebElement customersTab;
-
+    /**
+     * Заголовок столбца First Name
+     */
     @FindBy(xpath = "//tr/td[1]/a[contains(text(), 'First Name')]")
     private WebElement columnHeaderFirstName;
-
+    /**
+     * Поле для ввода поискового запроса
+     */
     @FindBy(xpath =  "//input[@type='text' and @placeholder='Search Customer']")
     private WebElement searchField;
-
+    /**
+     * Список с последним добавленным клиентом
+     */
     @FindBy(xpath = "//tbody/tr[last()]/td")
     private List<WebElement> customersList;
-
+    /**
+     * Список с именами клиентов
+     */
     @FindBy(xpath = "//tbody/tr/td[1]")
     private List<WebElement> customersFirstNameList;
-
+    /**
+     * Список с номерами аккаунтов клиентов
+     */
     @FindBy(xpath = "//tbody/tr/td[4]")
     private List<WebElement> customersAccountNumberList;
-
-    public void openPage() {
-        driver.get(mainPageUrl);
-    }
+    /**
+     * Последний добавленный элемент
+     */
+    private By lastRowLocator = By.xpath("//tbody/tr[last()]/td");
 
     public void goToCustomersTab() {
         customersTab.click();
@@ -59,5 +71,21 @@ public class CustomersPage {
 
     public List<WebElement> getCustomersAccountNumberList() {
         return customersAccountNumberList;
+    }
+
+    public WebElement getCustomersTab() {
+        return customersTab;
+    }
+
+    public WebElement getColumnHeaderFirstName() {
+        return columnHeaderFirstName;
+    }
+
+    public WebElement getSearchField() {
+        return searchField;
+    }
+
+    public By getLastRowLocator() {
+        return lastRowLocator;
     }
 }
