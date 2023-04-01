@@ -1,8 +1,6 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,17 +9,9 @@ import pages.CustomersPage;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class CustomerSortingTest {
-    public static WebDriver driver;
-    public static WebDriverWait wait;
-
-    @BeforeAll
-    public static void setUpDriver() {
-        WebDriverManager.chromedriver().setup();
-    }
+public class CustomerSortingTest extends BaseTest {
     private CustomersPage customersPage;
 
     @BeforeEach
@@ -29,8 +19,7 @@ public class CustomerSortingTest {
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(option);
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
         customersPage = new CustomersPage(driver);
@@ -40,10 +29,10 @@ public class CustomerSortingTest {
     @Test
     @Description("Сортировка клиентов по имени в лексикографическом порядке")
     public void sortCustomerByFirstName() {
-        //   wait.until(ExpectedConditions.visibilityOf(customersPage.getCustomersTab()));
+        wait.until(ExpectedConditions.visibilityOf(customersPage.getCustomersTab()));
         customersPage.goToCustomersTab();
 
-        //   wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
         List<String> firstNames = customersPage.getCustomersFirstNameList()
                 .stream()
                 .map(x -> x.getText())
@@ -53,9 +42,9 @@ public class CustomerSortingTest {
 
         Collections.sort(firstNames, Collections.reverseOrder());
 
-        //    wait.until(ExpectedConditions.visibilityOf(customersPage.getColumnHeaderFirstName()));
+        wait.until(ExpectedConditions.visibilityOf(customersPage.getColumnHeaderFirstName()));
         customersPage.clickOnFirstNameColumn();
-        //    wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
         List<String> resultReverseSortedFirstNames = customersPage.getCustomersFirstNameList()
                 .stream()
                 .map(x -> x.getText())
@@ -67,9 +56,9 @@ public class CustomerSortingTest {
 
         Collections.sort(firstNames);
 
-        //      wait.until(ExpectedConditions.visibilityOf(customersPage.getColumnHeaderFirstName()));
+        wait.until(ExpectedConditions.visibilityOf(customersPage.getColumnHeaderFirstName()));
         customersPage.clickOnFirstNameColumn();
-        //      wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
         List<String> resultSortedFirstNames = customersPage.getCustomersFirstNameList()
                 .stream()
                 .map(x -> x.getText())
@@ -78,10 +67,5 @@ public class CustomerSortingTest {
         Assertions.assertArrayEquals(firstNames.toArray(new String[0]),
                 resultSortedFirstNames.toArray(new String[0]),
                 "Сортировка ошибочна");
-    }
-
-    @AfterEach
-    public void quit() {
-        driver.quit();
     }
 }
