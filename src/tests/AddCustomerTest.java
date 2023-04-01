@@ -21,22 +21,16 @@ public class AddCustomerTest extends BaseTest{
 
     private CustomersPage customersPage;
 
-    @BeforeEach
-    public void setUp() {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(option);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+    public void initPreconditions() {
         addCustomerPage = new AddCustomerPage(driver);
         customersPage = new CustomersPage(driver);
-
         addCustomerPage.openPage();
     }
 
     @Test
     @Description("Добавление клиента")
     public void addCustomerTest() {
+        initPreconditions();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
@@ -64,6 +58,7 @@ public class AddCustomerTest extends BaseTest{
     @Test
     @Description("Проверка сообщения об ошибке при добавлении дубликата клиента")
     public void checkAlertMessage() {
+        initPreconditions();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());

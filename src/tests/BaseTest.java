@@ -17,6 +17,11 @@ public class BaseTest {
     public static WebDriver driver;
     public static WebDriverWait wait;
 
+    @BeforeAll
+    public static void setUpDriver() {
+        WebDriverManager.chromedriver().setup();
+    }
+
     @BeforeEach
     public void setUp() {
         ChromeOptions option = new ChromeOptions();
@@ -24,11 +29,6 @@ public class BaseTest {
         driver = new ChromeDriver(option);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
-    }
-
-    @BeforeAll
-    public static void setUpDriver() {
-        WebDriverManager.chromedriver().setup();
     }
 
     @AfterEach
