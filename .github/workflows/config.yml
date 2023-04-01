@@ -1,4 +1,4 @@
-name: Java Junit Selenium CI
+name: Java Junit Selenium
 
 on:
   push:
