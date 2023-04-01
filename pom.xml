@@ -76,9 +76,17 @@
             <artifactId>allure-rest-assured</artifactId>
             <version>2.13.8</version>
         </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <sourceDirectory>src/test/java</sourceDirectory>
+        <testSourceDirectory>src/tests</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
