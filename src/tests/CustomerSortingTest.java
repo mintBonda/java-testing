@@ -5,23 +5,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AddCustomerPage;
 import pages.CustomersPage;
+import utils.Constants;
+import utils.Waiters;
+
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *  Класс для проверки сортировки клиента
+ */
 public class CustomerSortingTest extends BaseTest {
     private CustomersPage customersPage;
 
-    @BeforeEach
-    public void setUp() {
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(option);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
+    public void initPreconditions() {
         customersPage = new CustomersPage(driver);
         customersPage.openPage();
     }
@@ -29,10 +29,11 @@ public class CustomerSortingTest extends BaseTest {
     @Test
     @Description("Сортировка клиентов по имени в лексикографическом порядке")
     public void sortCustomerByFirstName() {
-        wait.until(ExpectedConditions.visibilityOf(customersPage.getCustomersTab()));
+        initPreconditions();
+        Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
         List<String> firstNames = customersPage.getCustomersFirstNameList()
                 .stream()
                 .map(x -> x.getText())
@@ -42,9 +43,9 @@ public class CustomerSortingTest extends BaseTest {
 
         Collections.sort(firstNames, Collections.reverseOrder());
 
-        wait.until(ExpectedConditions.visibilityOf(customersPage.getColumnHeaderFirstName()));
+        Waiters.waitVisibilityOfElement(wait, customersPage.getColumnHeaderFirstName());
         customersPage.clickOnFirstNameColumn();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
         List<String> resultReverseSortedFirstNames = customersPage.getCustomersFirstNameList()
                 .stream()
                 .map(x -> x.getText())
@@ -56,9 +57,9 @@ public class CustomerSortingTest extends BaseTest {
 
         Collections.sort(firstNames);
 
-        wait.until(ExpectedConditions.visibilityOf(customersPage.getColumnHeaderFirstName()));
+        Waiters.waitVisibilityOfElement(wait, customersPage.getColumnHeaderFirstName());
         customersPage.clickOnFirstNameColumn();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
         List<String> resultSortedFirstNames = customersPage.getCustomersFirstNameList()
                 .stream()
                 .map(x -> x.getText())

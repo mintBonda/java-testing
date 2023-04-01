@@ -38,62 +38,44 @@ public class AddCustomerPage extends BasePage{
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement addCustomerButton;
 
-    @Step("Перейти во вкладку Add Customer")
     public void goToAddCustomerTab() {
         addCustomerTab.click();
     }
 
-    @Step("Заполнить поле First Name")
-    public void enterFirstName(String firstName) {
+    public void addClient(String firstName, String lastName, String postCode) {
         firstNameField.sendKeys(firstName);
-    }
-
-    @Step("Заполнить поле Last Name")
-    public void enterLastName(String lastName) {
         lastNameField.sendKeys(lastName);
-    }
-
-    @Step("Заполнить поле Post Code")
-    public void enterPostCode(String postCode) {
         postCodeField.sendKeys(postCode);
     }
 
-    @Step("Нажать на кнопку Add Customer")
     public void clickOnAddCustomerButton() {
         addCustomerButton.click();
     }
 
-    @Step("В окне оповещения нажать на кнопку Ok")
     public void acceptAlert() {
         driver.switchTo().alert().accept();
     }
 
-    @Step("Получить сообщение из окна оповещения")
     public String getAlertMessage() {
         return driver.switchTo().alert().getText();
     }
 
-    @Step("Получить вкладку добавления клиента")
     public WebElement getAddCustomerTab() {
         return addCustomerTab;
     }
 
-    @Step("Получить поле ввода для имени")
     public WebElement getFirstNameField() {
         return firstNameField;
     }
 
-    @Step("Получить поле ввода для фамилии")
     public WebElement getLastNameField() {
         return lastNameField;
     }
 
-    @Step("Получить поле ввода для почтового индекса")
     public WebElement getPostCodeField() {
         return postCodeField;
     }
 
-    @Step("Получить кнопку добавления клиента")
     public WebElement getAddCustomerButton() {
         return addCustomerButton;
     }

@@ -50,52 +50,42 @@ public class CustomersPage extends BasePage{
      */
     private By lastRowLocator = By.xpath("//tbody/tr[last()]/td");
 
-    @Step("Перейти во вкладку Customers")
     public void goToCustomersTab() {
         customersTab.click();
     }
 
-    @Step("Нажать на название столбца First Name")
     public void clickOnFirstNameColumn() {
         columnHeaderFirstName.click();
     }
 
-    @Step("Заполнить поле для поиска")
     public void enterSearchValue(String searchValue) {
         searchField.sendKeys(searchValue);
     }
 
-    @Step("Получить список клиентов")
     public List<WebElement> getCustomersList() {
         return customersList;
     }
 
-    @Step("Получить список имен клиентов")
     public List<WebElement> getCustomersFirstNameList() {
         return customersFirstNameList;
     }
 
-    @Step("Получить список с номерами аккаунтов клиентов")
     public List<WebElement> getCustomersAccountNumberList() {
         return customersAccountNumberList;
     }
 
-    @Step("Получить вкладку с клиентами")
     public WebElement getCustomersTab() {
         return customersTab;
     }
 
-    @Step("Получить заголовок столбца")
     public WebElement getColumnHeaderFirstName() {
         return columnHeaderFirstName;
     }
 
-    @Step("Получить поле поиска")
     public WebElement getSearchField() {
         return searchField;
     }
 
-    @Step("Получить локатор последней строки таблицы")
     public By getLastRowLocator() {
         return lastRowLocator;
     }

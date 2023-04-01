@@ -8,10 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AddCustomerPage;
 import pages.CustomersPage;
 import utils.Constants;
+import utils.Waiters;
 
 import java.time.Duration;
 import java.util.List;
 
+/**
+ *  Класс для проверки добавления клиента
+ */
 public class AddCustomerTest extends BaseTest{
     private AddCustomerPage addCustomerPage;
 
@@ -33,23 +37,22 @@ public class AddCustomerTest extends BaseTest{
     @Test
     @Description("Добавление клиента")
     public void addCustomerTest() {
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getAddCustomerTab()));
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getFirstNameField()));
-        addCustomerPage.enterFirstName(Constants.TEST_FIRSTNAME_VALUE);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getLastNameField()));
-        addCustomerPage.enterLastName(Constants.TEST_LASTNAME_VALUE);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getPostCodeField()));
-        addCustomerPage.enterPostCode(Constants.TEST_POSTCODE_VALUE);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getAddCustomerButton()));
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
+        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
+                Constants.TEST_POSTCODE_VALUE);
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
         addCustomerPage.clickOnAddCustomerButton();
-        wait.until(ExpectedConditions.alertIsPresent());
+        Waiters.waitAlertNotification(wait);
         addCustomerPage.acceptAlert();
 
+        Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         wait.until(ExpectedConditions.visibilityOf(customersPage.getCustomersTab()));
+
         customersPage.goToCustomersTab();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
         List<WebElement> customersList = customersPage.getCustomersList();
 
         Assertions.assertArrayEquals(
@@ -61,40 +64,35 @@ public class AddCustomerTest extends BaseTest{
     @Test
     @Description("Проверка сообщения об ошибке при добавлении дубликата клиента")
     public void checkAlertMessage() {
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getAddCustomerTab()));
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getFirstNameField()));
-        addCustomerPage.enterFirstName(Constants.TEST_FIRSTNAME_VALUE);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getLastNameField()));
-        addCustomerPage.enterLastName(Constants.TEST_LASTNAME_VALUE);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getPostCodeField()));
-        addCustomerPage.enterPostCode(Constants.TEST_POSTCODE_VALUE);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getAddCustomerButton()));
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
+        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
+                Constants.TEST_POSTCODE_VALUE);
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
         addCustomerPage.clickOnAddCustomerButton();
-        wait.until(ExpectedConditions.alertIsPresent());
+        Waiters.waitAlertNotification(wait);
         addCustomerPage.acceptAlert();
 
-        wait.until(ExpectedConditions.visibilityOf(customersPage.getCustomersTab()));
+        Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(customersPage.getLastRowLocator()));
+        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
         List<WebElement> customersList = customersPage.getCustomersList();
         String firstName = customersList.get(0).getText();
         String lastName = customersList.get(1).getText();
         String postCode = customersList.get(2).getText();
 
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getAddCustomerTab()));
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getFirstNameField()));
-        addCustomerPage.enterFirstName(firstName);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getLastNameField()));
-        addCustomerPage.enterLastName(lastName);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getPostCodeField()));
-        addCustomerPage.enterPostCode(postCode);
-        wait.until(ExpectedConditions.visibilityOf(addCustomerPage.getAddCustomerButton()));
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
+        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
+                Constants.TEST_POSTCODE_VALUE);
+
+        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
         addCustomerPage.clickOnAddCustomerButton();
 
-        wait.until(ExpectedConditions.alertIsPresent());
+        Waiters.waitAlertNotification(wait);
         String alertMessage = addCustomerPage.getAlertMessage();
 
         Assertions.assertEquals(Constants.ACTUAL_ALERT_MESSAGE, alertMessage,

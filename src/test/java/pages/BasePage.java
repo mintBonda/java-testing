@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import utils.Constants;
 
 /**
- * Страница с настройками всех страниц
+ * Родительский класс для всех страниц
  */
 public class BasePage {
     protected WebDriver driver;
@@ -16,7 +16,6 @@ public class BasePage {
         this.driver = driver;
     }
 
-    @Step("Открыть главную страницу")
     public void openPage() {
         driver.get(Constants.MAIN_PAGE_URL);
     }
