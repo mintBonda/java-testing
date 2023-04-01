@@ -2,7 +2,7 @@ name: Java Junit Selenium
 
 on:
   push:
-    branches: [ "main", "testBranch" ]
+    branches: [ "main", "ui-testing" ]
   pull_request:
     branches: [ "main" ]
           
