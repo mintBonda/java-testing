@@ -15,8 +15,6 @@ public class AddCustomerTest {
 
     private CustomersPage customersPage;
 
-    private OpenAccountPage openAccountPage;
-
     public String testFirstNameValue = "standard_first_name";
 
     public String testLastNameValue = "standard_last_name";
@@ -39,7 +37,6 @@ public class AddCustomerTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         addCustomerPage = new AddCustomerPage(driver);
         customersPage = new CustomersPage(driver);
-        openAccountPage = new OpenAccountPage(driver);
 
         addCustomerPage.openPage();
     }

@@ -1,4 +1,3 @@
-//import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,17 +37,14 @@ public class CustomersPage {
         driver.get(mainPageUrl);
     }
 
-    //  @Step("Перейти во вкладку Customers")
     public void goToCustomersTab() {
         customersTab.click();
     }
 
-    //   @Step("Нажать на название столбца First Name")
     public void clickOnFirstNameColumn() {
         columnHeaderFirstName.click();
     }
 
-    //  @Step("Заполнить поле для поиска")
     public void enterSearchValue(String searchValue) {
         searchField.sendKeys(searchValue);
     }

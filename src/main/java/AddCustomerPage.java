@@ -1,5 +1,3 @@
-//import io.qameta.allure.Step;
-import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,32 +34,26 @@ public class AddCustomerPage {
         driver.get(pageUrl);
     }
 
-//    @Step("Перейти во вкладку Add Customer")
     public void goToAddCustomerTab() {
         addCustomerTab.click();
     }
 
-    //  @Step("Заполнить поле First Name")
     public void enterFirstName(String firstName) {
         firstNameField.sendKeys(firstName);
     }
 
-    // @Step("Заполнить поле Last Name")
     public void enterLastName(String lastName) {
         lastNameField.sendKeys(lastName);
     }
 
-    // @Step("Заполнить поле Post Code")
     public void enterPostCode(String postCode) {
         postCodeField.sendKeys(postCode);
     }
 
-    //    @Step("Нажать на кнопку Add Customer")
     public void clickOnAddCustomerButton() {
         addCustomerButton.click();
     }
 
-//    @Step("В окне оповещения нажать на кнопку Ok")
     public void acceptAlert() {
         driver.switchTo().alert().accept();
     }
