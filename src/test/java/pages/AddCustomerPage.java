@@ -1,9 +1,11 @@
 package pages;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Constants;
+import utils.Waiters;
 
 /**
  * Страница для добавления клиента
@@ -42,10 +44,18 @@ public class AddCustomerPage extends BasePage{
         addCustomerTab.click();
     }
 
-    public void addClient(String firstName, String lastName, String postCode) {
+    public void fillFields(String firstName, String lastName, String postCode) {
         firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         postCodeField.sendKeys(postCode);
+    }
+
+    public void addCustomer(WebDriverWait wait) {
+        Waiters.waitVisibilityOfElement(wait, this.getFirstNameField());
+        this.fillFields(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
+                Constants.TEST_POSTCODE_VALUE);
+        Waiters.waitVisibilityOfElement(wait, this.getAddCustomerButton());
+        this.clickOnAddCustomerButton();
     }
 
     public void clickOnAddCustomerButton() {

@@ -1,16 +1,12 @@
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AddCustomerPage;
 import pages.CustomersPage;
 import utils.Constants;
 import utils.Waiters;
 
-import java.time.Duration;
 import java.util.List;
 
 /**
@@ -33,17 +29,11 @@ public class AddCustomerTest extends BaseTest{
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
-        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
-                Constants.TEST_POSTCODE_VALUE);
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
-        addCustomerPage.clickOnAddCustomerButton();
+        addCustomerPage.addCustomer(wait);
         Waiters.waitAlertNotification(wait);
         addCustomerPage.acceptAlert();
 
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
-        wait.until(ExpectedConditions.visibilityOf(customersPage.getCustomersTab()));
-
         customersPage.goToCustomersTab();
 
         Waiters.waitVisibilityOfElementLocated(wait, customersPage);
@@ -61,32 +51,11 @@ public class AddCustomerTest extends BaseTest{
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
-        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
-                Constants.TEST_POSTCODE_VALUE);
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
-        addCustomerPage.clickOnAddCustomerButton();
+        addCustomerPage.addCustomer(wait);
         Waiters.waitAlertNotification(wait);
         addCustomerPage.acceptAlert();
 
-        Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
-        customersPage.goToCustomersTab();
-
-        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
-        List<WebElement> customersList = customersPage.getCustomersList();
-        String firstName = customersList.get(0).getText();
-        String lastName = customersList.get(1).getText();
-        String postCode = customersList.get(2).getText();
-
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
-        addCustomerPage.goToAddCustomerTab();
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
-        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
-                Constants.TEST_POSTCODE_VALUE);
-
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
-        addCustomerPage.clickOnAddCustomerButton();
-
+        addCustomerPage.addCustomer(wait);
         Waiters.waitAlertNotification(wait);
         String alertMessage = addCustomerPage.getAlertMessage();
 

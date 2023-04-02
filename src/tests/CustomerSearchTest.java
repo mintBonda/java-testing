@@ -2,15 +2,11 @@ import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AddCustomerPage;
 import pages.CustomersPage;
 import utils.Constants;
 import utils.Waiters;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,11 +25,7 @@ public class CustomerSearchTest extends BaseTest {
         addCustomerPage.openPage();
         Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerTab());
         addCustomerPage.goToAddCustomerTab();
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getFirstNameField());
-        addCustomerPage.addClient(Constants.TEST_FIRSTNAME_VALUE, Constants.TEST_LASTNAME_VALUE,
-                Constants.TEST_POSTCODE_VALUE);
-        Waiters.waitVisibilityOfElement(wait, addCustomerPage.getAddCustomerButton());
-        addCustomerPage.clickOnAddCustomerButton();
+        addCustomerPage.addCustomer(wait);
         Waiters.waitAlertNotification(wait);
         addCustomerPage.acceptAlert();
     }
