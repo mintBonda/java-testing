@@ -28,7 +28,7 @@ public class CustomerSortingTest extends BaseTest {
 
     @Test
     @Description("Сортировка клиентов по имени в лексикографическом порядке")
-    public void sortCustomerByFirstName() {
+    public void sortCustomerByFirstNameTest() {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();

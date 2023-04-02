@@ -32,7 +32,7 @@ public class CustomerSearchTest extends BaseTest {
 
     @Test
     @Description("Поиск клиента по имени")
-    public void searchCustomerByFirstName() {
+    public void searchCustomerByFirstNameTest() {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
@@ -43,7 +43,7 @@ public class CustomerSearchTest extends BaseTest {
 
     @Test
     @Description("Поиск клиента по фамилии")
-    public void searchCustomerByLastName() {
+    public void searchCustomerByLastNameTest() {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
@@ -54,7 +54,7 @@ public class CustomerSearchTest extends BaseTest {
 
     @Test
     @Description("Поиск клиента по почтовому индексу")
-    public void searchCustomerByPostCode() {
+    public void searchCustomerByPostCodeTest() {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
@@ -65,7 +65,7 @@ public class CustomerSearchTest extends BaseTest {
 
     @Test
     @Description("Поиск клиента по номеру аккаунта")
-    public void searchCustomerByAccountNumber() {
+    public void searchCustomerByAccountNumberTest() {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();

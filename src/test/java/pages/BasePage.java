@@ -16,6 +16,9 @@ public class BasePage {
         this.driver = driver;
     }
 
+    /**
+     * Открыть главную страницу
+     */
     public void openPage() {
         driver.get(Constants.MAIN_PAGE_URL);
     }

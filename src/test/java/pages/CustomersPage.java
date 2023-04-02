@@ -52,19 +52,27 @@ public class CustomersPage extends BasePage{
      * Последний добавленный элемент
      */
     private By lastRowLocator = By.xpath("//tbody/tr[last()]/td");
-
+    /**
+     * Перейти во вкладку Customers
+     */
     public void goToCustomersTab() {
         customersTab.click();
     }
-
+    /**
+     * Нажать на название столбца First Name
+     */
     public void clickOnFirstNameColumn() {
         columnHeaderFirstName.click();
     }
-
+    /**
+     * Заполнить поле для поиска
+     */
     public void enterSearchValue(String searchValue) {
         searchField.sendKeys(searchValue);
     }
-
+    /**
+     * Выполнить поиск клиентов
+     */
     public List<String> searchCustomerByValue(WebDriverWait wait, String searchValue, int searchValueIndex) {
         Waiters.waitVisibilityOfElement(wait, this.getSearchField());
         this.enterSearchValue(searchValue);
@@ -75,31 +83,45 @@ public class CustomersPage extends BasePage{
         return Arrays.stream(customers.get(searchValueIndex).getText()
                 .split("\\s")).toList();
     }
-
+    /**
+     * Получить список клиентов
+     */
     public List<WebElement> getCustomersList() {
         return customersList;
     }
-
+    /**
+     * Получить список имен клиентов
+     */
     public List<WebElement> getCustomersFirstNameList() {
         return customersFirstNameList;
     }
-
+    /**
+     * Получить список с номерами аккаунтов клиентов
+     */
     public List<WebElement> getCustomersAccountNumberList() {
         return customersAccountNumberList;
     }
-
+    /**
+     * Получить вкладку с клиентами
+     */
     public WebElement getCustomersTab() {
         return customersTab;
     }
-
+    /**
+     * Получить заголовок столбца First Name
+     */
     public WebElement getColumnHeaderFirstName() {
         return columnHeaderFirstName;
     }
-
+    /**
+     * Получить поле поиска
+     */
     public WebElement getSearchField() {
         return searchField;
     }
-
+    /**
+     * Получить локатор последней строки таблицы
+     */
     public By getLastRowLocator() {
         return lastRowLocator;
     }
