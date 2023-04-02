@@ -5,7 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Waiters;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -60,6 +63,17 @@ public class CustomersPage extends BasePage{
 
     public void enterSearchValue(String searchValue) {
         searchField.sendKeys(searchValue);
+    }
+
+    public List<String> searchCustomerByValue(WebDriverWait wait, String searchValue, int searchValueIndex) {
+        Waiters.waitVisibilityOfElement(wait, this.getSearchField());
+        this.enterSearchValue(searchValue);
+
+        Waiters.waitVisibilityOfElementLocated(wait, this);
+        List<WebElement> customers = this.getCustomersList();
+
+        return Arrays.stream(customers.get(searchValueIndex).getText()
+                .split("\\s")).toList();
     }
 
     public List<WebElement> getCustomersList() {

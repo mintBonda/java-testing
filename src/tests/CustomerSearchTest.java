@@ -36,15 +36,7 @@ public class CustomerSearchTest extends BaseTest {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
-        Waiters.waitVisibilityOfElement(wait, customersPage.getSearchField());
-        customersPage.enterSearchValue(Constants.TEST_FIRSTNAME_VALUE);
-
-        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
-        List<WebElement> customers = customersPage.getCustomersList();
-
-        List<String> resultSearchList = Arrays.stream(customers.get(0).getText()
-                .split("\\s")).toList();
-
+        List<String> resultSearchList = customersPage.searchCustomerByValue(wait, Constants.TEST_FIRSTNAME_VALUE, 0);
         Assertions.assertTrue(resultSearchList.contains(Constants.TEST_FIRSTNAME_VALUE),
                 "Клиенты c указанным именем не найдены.");
     }
@@ -55,14 +47,7 @@ public class CustomerSearchTest extends BaseTest {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
-        Waiters.waitVisibilityOfElement(wait, customersPage.getSearchField());
-        customersPage.enterSearchValue(Constants.TEST_LASTNAME_VALUE);
-
-        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
-        List<WebElement> customers = customersPage.getCustomersList();
-        List<String> resultSearchList = Arrays.stream(customers.get(1).getText()
-                .split("\\s")).toList();
-
+        List<String> resultSearchList = customersPage.searchCustomerByValue(wait, Constants.TEST_LASTNAME_VALUE, 1);
         Assertions.assertTrue(resultSearchList.contains(Constants.TEST_LASTNAME_VALUE),
                 "Клиенты c указанной фамилией не найдены.");
     }
@@ -73,14 +58,7 @@ public class CustomerSearchTest extends BaseTest {
         initPreconditions();
         Waiters.waitVisibilityOfElement(wait, customersPage.getCustomersTab());
         customersPage.goToCustomersTab();
-        Waiters.waitVisibilityOfElement(wait, customersPage.getSearchField());
-        customersPage.enterSearchValue(Constants.TEST_POSTCODE_VALUE);
-
-        Waiters.waitVisibilityOfElementLocated(wait, customersPage);
-        List<WebElement> customers = customersPage.getCustomersList();
-        List<String> resultSearchList = Arrays.stream(customers.get(2).getText()
-                .split("\\s")).toList();
-
+        List<String> resultSearchList = customersPage.searchCustomerByValue(wait, Constants.TEST_POSTCODE_VALUE, 2);
         Assertions.assertTrue(resultSearchList.contains(Constants.TEST_POSTCODE_VALUE),
                 "Клиенты c указанным почтовым индексом не найдены.");
     }
