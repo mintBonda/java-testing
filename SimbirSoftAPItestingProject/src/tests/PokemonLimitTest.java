@@ -22,9 +22,9 @@ public class PokemonLimitTest {
                 .map(x -> x.getName())
                 .collect(Collectors.toList());
 
-        Assertions.assertTrue(pokemonList.size() == Constants.LIMIT_VALUE
-                , "Ограничение списка не соответствует заданному значению" );
-        Assertions.assertTrue(names.stream().allMatch(x -> !x.isEmpty())
-                , "У некоторого покемона нет имени");
+        Assertions.assertTrue(pokemonList.size() == Constants.LIMIT_VALUE,
+                "Ограничение списка не соответствует заданному значению" );
+        Assertions.assertTrue(names.stream().allMatch(x -> !x.isEmpty()),
+                "У некоторого покемона нет имени");
     }
 }
