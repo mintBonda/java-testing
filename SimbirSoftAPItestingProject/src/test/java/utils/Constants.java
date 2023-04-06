@@ -11,5 +11,5 @@ public interface Constants {
 
     public static final String ABILITY_NAME = "run-away";
 
-    public static final Integer LIMIT_VALUE = 20;
+    public static final Integer LIMIT_VALUE = 10;
 }
