@@ -17,5 +17,6 @@ public class PokemonTest extends BaseTest {
         softly.assertThat(rattataPokemon.getWeight()).isLessThan(pidgeottoPokemon.getWeight());
         softly.assertThat(rattataPokemon.getAbilities()).contains(Constants.ABILITY_NAME);
         softly.assertThat(pidgeottoPokemon.getAbilities()).doesNotContain(Constants.ABILITY_NAME);
+        softly.assertAll();
     }
 }

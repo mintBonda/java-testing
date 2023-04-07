@@ -23,5 +23,6 @@ public class PokemonLimitTest extends BaseTest {
 
         softly.assertThat(pokemonList.size()).isEqualTo(Constants.LIMIT_VALUE);
         softly.assertThat(names.stream().allMatch(x -> !x.isEmpty())).isTrue();
+        softly.assertAll();
     }
 }
