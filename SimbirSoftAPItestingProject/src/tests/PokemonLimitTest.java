@@ -1,6 +1,5 @@
 import io.qameta.allure.Description;
 import model.Pokemon;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import steps.Steps;
 import utils.Constants;
@@ -11,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * Класс для проверки ограниченного списка покемонов
  */
-public class PokemonLimitTest {
+public class PokemonLimitTest extends BaseTest {
     @Test
     @Description("Проверка ограниченного списка покемонов")
     public void checkPokemonLimitList() {
@@ -22,9 +21,7 @@ public class PokemonLimitTest {
                 .map(x -> x.getName())
                 .collect(Collectors.toList());
 
-        Assertions.assertTrue(pokemonList.size() == Constants.LIMIT_VALUE,
-                "Ограничение списка не соответствует заданному значению" );
-        Assertions.assertTrue(names.stream().allMatch(x -> !x.isEmpty()),
-                "У некоторого покемона нет имени");
+        softly.assertThat(pokemonList.size()).isEqualTo(Constants.LIMIT_VALUE);
+        softly.assertThat(names.stream().allMatch(x -> !x.isEmpty())).isTrue();
     }
 }
